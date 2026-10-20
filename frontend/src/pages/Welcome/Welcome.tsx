@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Sparkles, Lock, Mail, User, AlertTriangle } from 'lucide-react';
 import StarParticles from '../../components/ui/StarParticles';
 
+const API_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, '');
+
 interface WelcomeProps {
   onAuth: (authData: { userId: string; email: string; token: string }) => void;
 }
@@ -18,6 +20,7 @@ export default function Welcome({ onAuth }: WelcomeProps) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
 
   const validate = () => {
     if (!email.trim()) return 'Email is required.';
@@ -43,7 +46,7 @@ export default function Welcome({ onAuth }: WelcomeProps) {
         ? { email: email.trim().toLowerCase(), password, vaultPassword }
         : { email: email.trim().toLowerCase(), password };
 
-      const res = await fetch(endpoint, {
+      const res = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
