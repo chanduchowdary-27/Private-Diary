@@ -8,6 +8,7 @@ import re
 import uuid
 from datetime import datetime, timezone
 
+
 try:
     from .database import engine, Base, get_db, init_db
     from .models import UserModel, DiaryEntryModel, MediaModel, NoteModel
@@ -48,7 +49,12 @@ app = FastAPI(title="My Private Princess Diary API", version="2.0.0")
 # Allow CORS for Vite frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://private-diary-chi.vercel.app",
+        "https://private-diary-17aeamufe-chand14.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
