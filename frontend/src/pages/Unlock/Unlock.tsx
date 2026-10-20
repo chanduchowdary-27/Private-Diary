@@ -34,7 +34,7 @@ export default function Unlock({ onUnlock }: UnlockProps) {
 
     try {
       const session = getActiveSession();
-      const res = await fetch('${API_URL}/api/auth/unlock', {
+      const res = await fetch(`${API_URL}/api/auth/unlock`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
