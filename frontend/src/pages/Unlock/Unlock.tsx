@@ -4,6 +4,7 @@ import { Lock, Key, Eye, EyeOff, Sparkles, AlertTriangle, RotateCcw } from 'luci
 import StarParticles from '../../components/ui/StarParticles';
 
 import { getActiveSession } from '../../services/storageService';
+const API_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, '');
 
 interface UnlockProps {
   onUnlock: (newToken?: string) => void;
@@ -33,7 +34,7 @@ export default function Unlock({ onUnlock }: UnlockProps) {
 
     try {
       const session = getActiveSession();
-      const res = await fetch('/api/auth/unlock', {
+      const res = await fetch('${API_URL}/api/auth/unlock', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
